@@ -8,6 +8,7 @@ A real-time health monitoring dashboard built with Next.js, displaying patient v
 - [Architecture Overview](#️-architecture-overview)
 - [Testing Strategy & Core Components](#-testing-strategy--core-components)
 - [Available Scripts](#-available-scripts)
+- [Deployment](#-deployment)
 - [Technology Stack & Rationale](#️-technology-stack--rationale)
 - [Assumptions Made](#-assumptions-made)
 - [Features](#-features)
@@ -764,7 +765,81 @@ The frontend connects to the backend API at `NEXT_PUBLIC_API_URL`:
 | `npm run test:watch`    | Run tests in watch mode for development           |
 | `npm run test:coverage` | Run tests and generate coverage report            |
 
-## 🔄 CI/CD Pipeline
+## � Deployment
+
+### Deploy to Netlify (Free)
+
+#### Option 1: Deploy via Netlify UI (Recommended)
+
+1. **Push to GitHub**
+
+   ```bash
+   git add .
+   git commit -m "Prepare for Netlify deployment"
+   git push origin main
+   ```
+
+2. **Connect to Netlify**
+   - Go to [netlify.com](https://netlify.com) and sign up/login
+   - Click "Add new site" → "Import an existing project"
+   - Connect your GitHub account and select this repository
+
+3. **Configure Build Settings**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+   - Click "Deploy site"
+
+4. **Add Environment Variables**
+   - Go to Site settings → Environment variables
+   - Add the following variables:
+     ```
+     NEXT_PUBLIC_API_URL=https://your-backend-api.com
+     NEXT_PUBLIC_WS_URL=https://your-backend-api.com
+     ```
+
+#### Option 2: Deploy via Netlify CLI
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Initialize and deploy
+netlify init
+
+# Deploy to production
+netlify deploy --prod
+```
+
+#### Option 3: Deploy Button
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/YOUR_USERNAME/health-monitor-frontend)
+
+### Post-Deployment
+
+1. **Update Backend CORS**: Add your Netlify domain to backend CORS whitelist
+2. **Test Real-time Features**: Verify WebSocket connections work
+3. **Custom Domain** (Optional): Configure custom domain in Netlify settings
+4. **Enable HTTPS**: Automatically provided by Netlify
+
+### Environment Variables Required
+
+| Variable              | Description                   | Example                         |
+| --------------------- | ----------------------------- | ------------------------------- |
+| `NEXT_PUBLIC_API_URL` | Backend API endpoint          | `https://api.healthmonitor.com` |
+| `NEXT_PUBLIC_WS_URL`  | WebSocket endpoint (optional) | `https://api.healthmonitor.com` |
+
+### Continuous Deployment
+
+Netlify automatically deploys when you push to your main branch:
+
+- **Production**: Pushes to `main` branch
+- **Preview**: Pull requests get preview URLs
+- **Branch deploys**: Enable in Netlify settings for other branches
+
+## �🔄 CI/CD Pipeline
 
 Automated testing and deployment via GitHub Actions:
 
