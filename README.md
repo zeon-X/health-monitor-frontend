@@ -36,7 +36,7 @@ A real-time health monitoring dashboard built with Next.js, displaying patient v
 
 ```bash
 # Clone the repository
-git clone <https://github.com/zeon-X/health-monitor-frontend.git>
+git clone https://github.com/zeon-X/health-monitor-frontend.git
 cd health-monitor-frontend
 
 # Install dependencies
