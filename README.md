@@ -769,83 +769,35 @@ The frontend connects to the backend API at `NEXT_PUBLIC_API_URL`:
 | `npm run test:watch`    | Run tests in watch mode for development           |
 | `npm run test:coverage` | Run tests and generate coverage report            |
 
-## � Deployment
+## 🚀 Deployment
 
-### Deploy to Netlify (Free)
+**Live Application:** [https://hospital-monitor.netlify.app/](https://hospital-monitor.netlify.app/)
 
-#### Option 1: Deploy via Netlify UI (Recommended)
+### Quick Deploy to Netlify
 
-1. **Push to GitHub**
+The project includes a `netlify.toml` configuration file for seamless deployment:
 
-   ```bash
-   git add .
-   git commit -m "Prepare for Netlify deployment"
-   git push origin main
-   ```
+```toml
+[build]
+  command = "npm run build"
+  publish = ".next"
 
-2. **Connect to Netlify**
-   - Go to [netlify.com](https://netlify.com) and sign up/login
-   - Click "Add new site" → "Import an existing project"
-   - Connect your GitHub account and select this repository
-
-3. **Configure Build Settings**
-   - Build command: `npm run build`
-   - Publish directory: `.next`
-   - Click "Deploy site"
-
-4. **Add Environment Variables**
-   - Go to Site settings → Environment variables
-   - Add the following variables:
-     ```
-     NEXT_PUBLIC_API_URL=https://your-backend-api.com
-     NEXT_PUBLIC_WS_URL=https://your-backend-api.com
-     ```
-
-#### Option 2: Deploy via Netlify CLI
-
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Login to Netlify
-netlify login
-
-# Initialize and deploy
-netlify init
-
-# Deploy to production
-netlify deploy --prod
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 ```
 
-#### Option 3: Deploy Button
+**Steps:**
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/YOUR_USERNAME/health-monitor-frontend)
+1. Push to GitHub
+2. Connect repository to [Netlify](https://netlify.com)
+3. Add environment variables in Netlify dashboard:
+   - `NEXT_PUBLIC_API_URL` = `https://health-monitor-backend-73e8.onrender.com`
+   - `NEXT_PUBLIC_WS_URL` = `https://health-monitor-backend-73e8.onrender.com`
+4. Deploy automatically on push to `main` branch
 
-### Post-Deployment
+## 🔄 CI/CD Pipeline
 
-1. **Update Backend CORS**: Add your Netlify domain to backend CORS whitelist
-2. **Test Real-time Features**: Verify WebSocket connections work
-3. **Custom Domain** (Optional): Configure custom domain in Netlify settings
-4. **Enable HTTPS**: Automatically provided by Netlify
-
-### Environment Variables Required
-
-| Variable              | Description                   | Example                         |
-| --------------------- | ----------------------------- | ------------------------------- |
-| `NEXT_PUBLIC_API_URL` | Backend API endpoint          | `https://api.healthmonitor.com` |
-| `NEXT_PUBLIC_WS_URL`  | WebSocket endpoint (optional) | `https://api.healthmonitor.com` |
-
-### Continuous Deployment
-
-Netlify automatically deploys when you push to your main branch:
-
-- **Production**: Pushes to `main` branch
-- **Preview**: Pull requests get preview URLs
-- **Branch deploys**: Enable in Netlify settings for other branches
-
-## �🔄 CI/CD Pipeline
-
-Automated testing and deployment via GitHub Actions:
+Automated testing via GitHub Actions:
 
 - ✅ Linting (ESLint)
 - ✅ Type checking (TypeScript)
