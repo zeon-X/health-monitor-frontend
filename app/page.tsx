@@ -67,7 +67,9 @@ export default function DashboardPage() {
               record={record}
               patientAnomalies={getPatientAnomalies(record.patientId)}
               onAlertClick={setSelectedPatient}
-              onViewDetails={(patientId) => router.push(`/patients/${patientId}`)}
+              onViewDetails={(patientId) =>
+                router.push(`/patients/${patientId}`)
+              }
             />
           ))}
         </div>

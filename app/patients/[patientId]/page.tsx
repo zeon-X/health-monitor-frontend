@@ -8,11 +8,13 @@ import VitalChartsGrid from "@/components/patient/VitalChartsGrid";
 import VitalsHistoryTable from "@/components/patient/VitalsHistoryTable";
 import { usePatientDetail } from "@/hooks/usePatientDetail";
 import { useParams, useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function PatientDetailPage() {
   const params = useParams();
   const router = useRouter();
   const patientId = params.patientId as string;
+  const anomalyHistoryRef = useRef<HTMLDivElement>(null);
 
   const {
     patient,
@@ -57,7 +59,7 @@ export default function PatientDetailPage() {
         activeAnomaliesCount={activeAnomalies.length}
         totalAnomaliesCount={anomalies.length}
         onAlertClick={() => {
-          document.getElementById("anomaly-history")?.scrollIntoView({
+          anomalyHistoryRef.current?.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
@@ -75,7 +77,12 @@ export default function PatientDetailPage() {
       <VitalChartsGrid vitalsHistory={vitalsHistory} patient={patient} />
 
       {/* Anomaly History */}
-      <AnomalyHistory anomalies={anomalies} onAcknowledge={handleAcknowledge} />
+      <div ref={anomalyHistoryRef}>
+        <AnomalyHistory
+          anomalies={anomalies}
+          onAcknowledge={handleAcknowledge}
+        />
+      </div>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function PatientCard({
   onAlertClick,
   onViewDetails,
 }: PatientCardProps) {
-  console.log(patientAnomalies);
+  // console.log(patientAnomalies);
 
   const hasAlert = patientAnomalies.length > 0;
   const activeAnomalies = patientAnomalies.filter((a) => !a.acknowledged);

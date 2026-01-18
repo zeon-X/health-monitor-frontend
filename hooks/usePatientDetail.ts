@@ -19,17 +19,17 @@ export function usePatientDetail(patientId: string) {
     // Fetch patient data
     const fetchData = async () => {
         try {
-            console.log("🔍 Fetching data for patient:", patientId);
+            // console.log("🔍 Fetching data for patient:", patientId);
             const [patientData, vitalsResponse, anomaliesData] = await Promise.all([
                 getPatient(patientId),
                 getVitalsHistory(patientId, 24),
                 getPatientAnomalies(patientId),
             ]);
 
-            console.log(
-                "✅ Data fetched, vitals count:",
-                vitalsResponse.records?.length || 0
-            );
+            // console.log(
+            //     "✅ Data fetched, vitals count:",
+            //     vitalsResponse.records?.length || 0
+            // );
             setPatient(patientData);
             // Backend returns { records: [...] } format
             const records = vitalsResponse.records || vitalsResponse;
@@ -62,18 +62,18 @@ export function usePatientDetail(patientId: string) {
 
         // Listen for vital updates
         const handleVitalUpdate = (data: any) => {
-            console.log("🔄 Vital update received:", data);
+            // console.log("🔄 Vital update received:", data);
             if (data.patientId === patientId) {
-                console.log("✅ Updating patient data for:", patientId);
+                // console.log("✅ Updating patient data for:", patientId);
                 fetchData();
             }
         };
 
         // Listen for anomaly alerts
         const handleAnomalyAlert = (data: any) => {
-            console.log("🚨 Anomaly alert received:", data);
+            // console.log("🚨 Anomaly alert received:", data);
             if (data.patientId === patientId) {
-                console.log("✅ Updating patient data for:", patientId);
+                // console.log("✅ Updating patient data for:", patientId);
                 fetchData();
             }
         };
@@ -83,7 +83,7 @@ export function usePatientDetail(patientId: string) {
 
         // Polling fallback - refresh every 30 seconds
         const interval = setInterval(() => {
-            console.log("🔄 Auto-refresh patient data");
+            // console.log("🔄 Auto-refresh patient data");
             fetchData();
         }, 30000);
 

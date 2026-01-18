@@ -69,13 +69,13 @@ export function useDashboard() {
 
         // Listen for vital updates
         socket.on("vital_update", (data) => {
-            console.log("Vital update:", data);
+            // console.log("Vital update:", data);
             fetchData();
         });
 
         // Listen for anomaly alerts
         socket.on("anomaly_alert", (data) => {
-            console.log("Anomaly alert:", data);
+            // console.log("Anomaly alert:", data);
             fetchData();
 
             // Optional: Show browser notification
