@@ -8,8 +8,10 @@ import ErrorState from "@/components/ErrorState";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useDashboard } from "@/hooks/useDashboard";
 import { UsersIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
+  const router = useRouter();
   const {
     summary,
     loading,
@@ -65,9 +67,7 @@ export default function DashboardPage() {
               record={record}
               patientAnomalies={getPatientAnomalies(record.patientId)}
               onAlertClick={setSelectedPatient}
-              onViewDetails={(patientId) =>
-                (window.location.href = `/patients/${patientId}`)
-              }
+              onViewDetails={(patientId) => router.push(`/patients/${patientId}`)}
             />
           ))}
         </div>
@@ -78,9 +78,7 @@ export default function DashboardPage() {
             patients={summary.latestVitals}
             getPatientAnomalies={getPatientAnomalies}
             onAlertClick={setSelectedPatient}
-            onViewDetails={(patientId) =>
-              (window.location.href = `/patients/${patientId}`)
-            }
+            onViewDetails={(patientId) => router.push(`/patients/${patientId}`)}
           />
         </div>
 
