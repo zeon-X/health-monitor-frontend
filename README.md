@@ -2,6 +2,10 @@
 
 A real-time health monitoring dashboard built with Next.js, displaying patient vitals, anomaly detection, and alerts with WebSocket integration for healthcare facilities.
 
+**🌐 Live Demo:** [https://hospital-monitor.netlify.app/](https://hospital-monitor.netlify.app/)
+
+> **Note:** This project evolved from a generic HTTP monitoring system into a focused health monitoring platform. While the core requirement was to ping endpoints and monitor responses, I reframed it as an elderly patient health monitoring system with realistic vitals (heart rate, SpO₂, temperature, motion) and anomaly detection. This approach demonstrates practical real-time monitoring with alerting while maintaining all original technical requirements.
+
 ## 📑 Table of Contents
 
 - [Quick Start](#-quick-start)
