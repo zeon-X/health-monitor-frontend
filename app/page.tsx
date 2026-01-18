@@ -41,10 +41,10 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Summary Cards */}
       <SummaryCards
-        totalPatients={summary.summary.totalPatients}
-        activeAnomalies={summary.summary.activeAnomalies}
-        criticalCount={summary.summary.criticalCount}
-        warningCount={summary.summary.warningCount}
+        totalPatients={summary?.summary?.totalPatients}
+        activeAnomalies={summary?.summary?.activeAnomalies}
+        criticalCount={summary?.summary?.criticalCount}
+        warningCount={summary?.summary?.warningCount}
       />
 
       {/* Patient Cards Grid */}
@@ -54,14 +54,14 @@ export default function DashboardPage() {
             Patient Overview
           </h2>
           <span className="text-sm text-gray-500">
-            {summary.latestVitals.length} patients
+            {summary?.latestVitals.length} patients
           </span>
         </div>
 
         {/* Patient Table - Desktop / Mobile Cards */}
         {/* Mobile Card View */}
         <div className="block lg:hidden space-y-4">
-          {summary.latestVitals.map((record) => (
+          {summary?.latestVitals.map((record) => (
             <PatientCard
               key={record._id}
               record={record}
@@ -77,7 +77,7 @@ export default function DashboardPage() {
         {/* Desktop Table View */}
         <div className="hidden lg:block">
           <PatientTable
-            patients={summary.latestVitals}
+            patients={summary?.latestVitals}
             getPatientAnomalies={getPatientAnomalies}
             onAlertClick={setSelectedPatient}
             onViewDetails={(patientId) => router.push(`/patients/${patientId}`)}
@@ -85,7 +85,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Empty State */}
-        {summary.latestVitals.length === 0 && (
+        {summary?.latestVitals.length === 0 && (
           <div className="rounded-lg border border-gray-200 bg-white p-12 text-center">
             <UsersIcon className="mx-auto h-12 w-12 text-gray-400" />
             <p className="mt-2 text-sm text-gray-500">
